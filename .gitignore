@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.env
+
+# IDE
+.vscode/
+.idea/
+
+# Docker
+.docker/
+
+# Jenkins
+jenkins.war
+workspace/
+
+# System
+.DS_Store
+Thumbs.db 
