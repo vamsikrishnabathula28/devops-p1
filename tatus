@@ -1,0 +1,9 @@
+[33mcommit 46cc477d9336f6a89c0c3e333c9d1a3e51c4c79f[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: vamsikrishnabathula28 <vamsikrishnabathula28@gmail.com>
+Date:   Sat Apr 5 17:07:25 2025 +0530
+
+    Initial commit: Add Flask application with Docker and Jenkins configuration
+
+.gitignore
+README.md
+app.py

@@ -23,10 +23,10 @@ ENV/
 # Docker
 .docker/
 
+# System Files
+.DS_Store
+Thumbs.db
+
 # Jenkins
 jenkins.war
-workspace/
-
-# System
-.DS_Store
-Thumbs.db 
+workspace/ 
