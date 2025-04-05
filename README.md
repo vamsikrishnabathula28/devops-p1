@@ -1,18 +1,60 @@
-# Docker CI/CD Demo Project
+# Docker CI/CD Demo Application
 
-This project demonstrates a simple web application containerized with Docker and set up with a CI/CD pipeline using Jenkins.
+A simple web application demonstrating Docker containerization and CI/CD with Jenkins.
+
+## Features
+
+- Flask web application
+- Docker containerization
+- Jenkins CI/CD pipeline
+- Automated testing
+- Continuous deployment
+
+## Setup and Running
+
+1. Create virtual environment:
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows: .\venv\Scripts\activate
+```
+
+2. Install dependencies:
+```bash
+pip install -r requirements.txt
+```
+
+3. Run the application:
+```bash
+python app.py
+```
+
+The application will be available at http://localhost:8080
+
+## Docker
+
+Build and run with Docker:
+```bash
+docker build -t webapp-demo .
+docker run -p 8080:8080 webapp-demo
+```
+
+## Jenkins Pipeline
+
+The Jenkinsfile contains the CI/CD pipeline configuration:
+- Build stage: Creates Docker image
+- Test stage: Runs application tests
+- Deploy stage: Deploys the application
 
 ## Project Structure
 
 ```
 .
-├── app.py              # Flask application
-├── templates/          # HTML templates
-│   └── index.html     # Main page template
+├── app.py              # Main Flask application
 ├── requirements.txt    # Python dependencies
 ├── Dockerfile         # Docker configuration
-├── Jenkinsfile        # Jenkins pipeline configuration
-└── README.md          # This file
+├── Jenkinsfile        # Jenkins pipeline
+└── templates/         # HTML templates
+    └── index.html     # Main page template
 ```
 
 ## Prerequisites
