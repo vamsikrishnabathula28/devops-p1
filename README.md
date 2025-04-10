@@ -1,158 +1,100 @@
-# 🚀 Enterprise-Grade Web Server Automation with Ansible
+# 🚀 Docker Jenkins CI/CD Demo
 
-![Ansible](https://img.shields.io/badge/Ansible-EE0000?style=for-the-badge&logo=ansible&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+![Jenkins](https://img.shields.io/badge/Jenkins-D24939?style=for-the-badge&logo=jenkins&logoColor=white)
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![Nginx](https://img.shields.io/badge/Nginx-009639?style=for-the-badge&logo=nginx&logoColor=white)
-![Prometheus](https://img.shields.io/badge/Prometheus-E6522C?style=for-the-badge&logo=Prometheus&logoColor=white)
-![Grafana](https://img.shields.io/badge/Grafana-F46800?style=for-the-badge&logo=grafana&logoColor=white)
+![Flask](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white)
 
 ## 📋 Project Overview
 
-This project demonstrates a complete DevOps workflow for deploying a scalable web server infrastructure using Infrastructure as Code (IaC) principles. It showcases modern DevOps practices and tools while implementing industry best practices for security, monitoring, and automation.
+This project demonstrates a complete CI/CD pipeline using Docker and Jenkins. It showcases modern DevOps practices and tools while implementing industry best practices for containerization, automation, and deployment.
 
 ### 🎯 Key Features
 
-- **Infrastructure as Code (IaC)**
-  - Ansible playbooks for automated deployment
-  - Version-controlled infrastructure
-  - Reproducible environments
-  - Configuration management
-
-- **Container Orchestration**
+- **Containerization**
   - Docker containerization
   - Multi-container application support
   - Container health monitoring
   - Automated container deployment
 
-- **High Availability**
-  - Load balancing configuration
-  - Failover support
-  - Service redundancy
-  - Health checks
+- **CI/CD Pipeline**
+  - Jenkins automation
+  - Automated testing
+  - Continuous deployment
+  - Pipeline visualization
 
-- **Security Implementation**
-  - UFW firewall configuration
-  - Secure Nginx setup
-  - Docker security best practices
-  - System hardening
-  - Regular security updates
-
-- **Monitoring & Logging**
-  - Prometheus metrics collection
-  - Grafana dashboards
-  - Application logging
-  - System metrics monitoring
-  - Performance tracking
+- **Application Features**
+  - Flask web application
+  - RESTful API endpoints
+  - Health check endpoints
+  - Performance monitoring
 
 ## 🛠️ Technology Stack
 
 ### Core Technologies
-- **Ansible**: Configuration management and automation
 - **Docker**: Containerization and orchestration
-- **Nginx**: Reverse proxy and web server
-- **Python Flask**: Web application framework
+- **Jenkins**: CI/CD automation
+- **Python**: Application development
+- **Flask**: Web framework
 
-### Monitoring & Logging
-- **Prometheus**: Metrics collection and storage
-- **Grafana**: Visualization and dashboards
-- **Node Exporter**: System metrics collection
-
-### Security
-- **UFW**: Firewall management
-- **SSL/TLS**: Secure communication
-- **Docker Security**: Container security
+### Testing & Quality
+- **Pytest**: Unit testing
+- **Jenkins Pipeline**: Automated testing
+- **Code Quality**: Linting and style checks
 
 ## 📁 Project Structure
 
 ```
-ansible-project/
-├── inventory/
-│   └── hosts                 # Server inventory
-├── roles/
-│   ├── common/              # Basic server setup
-│   ├── nginx/               # Nginx configuration
-│   ├── docker/              # Docker installation
-│   ├── webapp/              # Flask application
-│   ├── firewall/            # Security configuration
-│   └── monitoring/          # Monitoring setup
-└── site.yml                 # Main playbook
+.
+├── app.py              # Main Flask application
+├── requirements.txt    # Python dependencies
+├── Dockerfile         # Docker configuration
+├── Jenkinsfile        # Jenkins pipeline
+└── templates/         # HTML templates
+    └── index.html     # Main page template
 ```
 
 ## 🚀 Getting Started
 
 ### Prerequisites
-- Ansible 2.9+
 - Docker
+- Jenkins
 - Python 3.8+
-- Ubuntu 20.04 LTS (target servers)
+- Git
 
 ### Installation
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/vamsikrishnabathula28/ansible-web-server-deployment.git
-   cd ansible-web-server-deployment
+   git clone https://github.com/vamsikrishnabathula28/docker-jenkins-cicd-demo.git
+   cd docker-jenkins-cicd-demo
    ```
 
-2. Update inventory:
+2. Build the Docker image:
    ```bash
-   # Edit inventory/hosts with your server details
-   nano inventory/hosts
+   docker build -t flask-app .
    ```
 
-3. Run the playbook:
+3. Run the container:
    ```bash
-   ansible-playbook -i inventory/hosts site.yml
+   docker run -d -p 5000:5000 --name flask-app-container flask-app
    ```
 
 ## 📸 Application Output Examples
 
-### Web Application Interface
-![Web Application](https://raw.githubusercontent.com/vamsikrishnabathula28/docker-jenkins-cicd-demo/main/templates/index.html)
-
-### Jenkins Pipeline Output
+### Docker Container Status
 ```bash
-Started by user admin
-[Pipeline] Start of Pipeline
-[Pipeline] node
-Running on Jenkins in /var/jenkins_home/workspace/docker-jenkins-cicd-demo
-[Pipeline] {
-  [Pipeline] stage
-  [Pipeline] { (Build)
-    [Pipeline] sh
-    + docker build -t webapp-demo .
-    Successfully built abc123def456
-    Successfully tagged webapp-demo:latest
-  }
-  [Pipeline] stage
-  [Pipeline] { (Test)
-    [Pipeline] sh
-    + docker run --rm webapp-demo python -m pytest
-    ============================= test session starts ==============================
-    collected 3 items
-    test_app.py::test_home_page PASSED
-    test_app.py::test_about_page PASSED
-    test_app.py::test_contact_page PASSED
-    ============================== 3 passed in 1.52s ==============================
-  }
-  [Pipeline] stage
-  [Pipeline] { (Deploy)
-    [Pipeline] sh
-    + docker tag webapp-demo:latest webapp-demo:v1.0.0
-    + docker push webapp-demo:v1.0.0
-    The push refers to repository [webapp-demo]
-    v1.0.0: Pushed
-  }
-}
-[Pipeline] End of Pipeline
-Finished: SUCCESS
+$ docker ps
+CONTAINER ID   IMAGE          COMMAND                  CREATED         STATUS         PORTS                    NAMES
+abc123def456   flask-app      "python app.py"          2 minutes ago   Up 2 minutes   0.0.0.0:5000->5000/tcp   flask-app-container
 ```
 
-### Docker Container Logs
+### Container Logs
 ```bash
-$ docker logs webapp-demo
- * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)
+$ docker logs flask-app-container
+ * Serving Flask app 'app'
+ * Debug mode: on
+ * Running on http://0.0.0.0:5000
  * Restarting with stat
  * Debugger is active!
  * Debugger PIN: 123-456-789
@@ -160,7 +102,7 @@ $ docker logs webapp-demo
 
 ### Application API Response
 ```bash
-$ curl http://localhost:8080/api/health
+$ curl http://localhost:5000/api/health
 {
   "status": "healthy",
   "version": "1.0.0",
@@ -168,184 +110,34 @@ $ curl http://localhost:8080/api/health
 }
 ```
 
-### Load Balancer Status
-```bash
-$ curl http://localhost:8080/status
-{
-  "active_servers": 2,
-  "total_requests": 1234,
-  "average_response_time": "45ms",
-  "server_status": {
-    "web1": "healthy",
-    "web2": "healthy"
-  }
-}
-```
+## 🔄 CI/CD Pipeline
 
-### Monitoring Dashboard
-![Monitoring Dashboard](https://raw.githubusercontent.com/vamsikrishnabathula28/docker-jenkins-cicd-demo/main/templates/monitoring.png)
+The Jenkinsfile defines a pipeline with the following stages:
 
-## 📸 Application Status and Troubleshooting
+1. **Build**: Creates a Docker image
+2. **Test**: Runs application tests
+3. **Deploy**: Tags and pushes the image
 
-### Connection Status
-```bash
-$ curl -v http://localhost:8080
-*   Trying 127.0.0.1:8080...
-* connect to 127.0.0.1 port 8080 failed: Connection refused
-* Failed to connect to localhost port 8080: Connection refused
-* Could not resolve host: localhost
-* Closing connection 0
-curl: (7) Failed to connect to localhost port 8080: Connection refused
-```
+### Setting up Jenkins
 
-### Docker Container Status
-```bash
-$ docker ps
-CONTAINER ID   IMAGE          COMMAND                  CREATED         STATUS         PORTS                    NAMES
-abc123def456   webapp-demo    "python app.py"          2 minutes ago   Up 2 minutes   0.0.0.0:8080->8080/tcp   webapp-demo
-```
-
-### Container Logs
-```bash
-$ docker logs webapp-demo
- * Serving Flask app 'app'
- * Debug mode: on
- * Running on http://0.0.0.0:8080
- * Restarting with stat
- * Debugger is active!
- * Debugger PIN: 123-456-789
-```
-
-### Troubleshooting Steps
-
-1. Check if the container is running:
-   ```bash
-   docker ps | grep webapp-demo
-   ```
-
-2. Verify port mapping:
-   ```bash
-   docker port webapp-demo
-   # Should show: 8080/tcp -> 0.0.0.0:8080
-   ```
-
-3. Check container logs for errors:
-   ```bash
-   docker logs webapp-demo
-   ```
-
-4. Test container connectivity:
-   ```bash
-   docker exec webapp-demo curl localhost:8080
-   ```
-
-5. Verify firewall settings:
-   ```bash
-   sudo ufw status
-   # Should show: 8080/tcp ALLOW IN Anywhere
-   ```
-
-### Common Issues and Solutions
-
-1. **Connection Refused Error**
-   - Ensure the container is running: `docker start webapp-demo`
-   - Check port conflicts: `netstat -tulpn | grep 8080`
-   - Verify firewall rules: `sudo ufw allow 8080/tcp`
-
-2. **Container Not Starting**
-   - Check resource limits: `docker stats webapp-demo`
-   - View detailed logs: `docker logs webapp-demo --tail 100`
-   - Verify environment variables: `docker inspect webapp-demo`
-
-3. **Application Not Responding**
-   - Restart the container: `docker restart webapp-demo`
-   - Check application logs: `docker logs webapp-demo -f`
-   - Verify network connectivity: `docker network inspect bridge`
-
-### Health Check Endpoint
-```bash
-$ curl http://localhost:8080/health
-{
-  "status": "healthy",
-  "container_id": "abc123def456",
-  "uptime": "2m 30s",
-  "memory_usage": "45MB",
-  "cpu_usage": "2.3%"
-}
-```
-
-### Application Metrics
-```bash
-$ curl http://localhost:8080/metrics
-{
-  "requests_total": 156,
-  "error_count": 0,
-  "response_time_ms": 45,
-  "active_connections": 3,
-  "memory_usage_mb": 45,
-  "cpu_usage_percent": 2.3
-}
-```
-
-## 🔒 Security Features
-
-- **Firewall Configuration**
-  - UFW rules for essential ports
-  - Default deny policy
-  - IP whitelisting support
-
-- **Nginx Security**
-  - SSL/TLS configuration
-  - Security headers
-  - Rate limiting
-  - DDoS protection
-
-- **Docker Security**
-  - Non-root containers
-  - Resource limits
-  - Network isolation
-  - Image scanning
-
-## 📊 Monitoring & Logging
-
-### Metrics Collection
-- System metrics (CPU, Memory, Disk)
-- Application metrics
-- Container metrics
-- Network metrics
-
-### Visualization
-- Custom Grafana dashboards
-- Real-time monitoring
-- Alert configuration
-- Performance tracking
-
-## 🔄 CI/CD Integration
-
-The project is designed to integrate with various CI/CD platforms:
-- Jenkins
-- GitHub Actions
-- GitLab CI
-- Azure DevOps
-
-## 📈 Performance Optimization
-
-- Nginx optimization
-- Docker container optimization
-- System resource management
-- Load balancing configuration
-- Caching strategies
+1. Install Jenkins on your server
+2. Install required plugins:
+   * Docker Pipeline
+   * Pipeline
+   * Git
+3. Configure Docker credentials in Jenkins
+4. Create a new Pipeline job and point it to this repository
 
 ## 🎯 Best Practices
 
-- Infrastructure as Code (IaC)
-- Configuration Management
-- Automated Deployment
-- Security Hardening
-- Monitoring & Alerting
-- High Availability
-- Scalability
+- Containerization
+- Automated Testing
+- Continuous Integration
+- Continuous Deployment
+- Code Quality
 - Documentation
+- Security
+- Monitoring
 
 ## 🤝 Contributing
 
@@ -362,6 +154,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🙏 Acknowledgments
 
-- Ansible Community
 - Docker Community
+- Jenkins Community
 - Open Source Community 
