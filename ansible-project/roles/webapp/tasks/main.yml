@@ -1,0 +1,30 @@
+---
+- name: Create application directory
+  file:
+    path: /opt/webapp
+    state: directory
+    mode: '0755'
+
+- name: Copy Docker Compose file
+  template:
+    src: docker-compose.yml.j2
+    dest: /opt/webapp/docker-compose.yml
+    mode: '0644'
+
+- name: Copy Flask application
+  template:
+    src: app.py.j2
+    dest: /opt/webapp/app.py
+    mode: '0644'
+
+- name: Copy requirements.txt
+  template:
+    src: requirements.txt.j2
+    dest: /opt/webapp/requirements.txt
+    mode: '0644'
+
+- name: Start Docker containers
+  docker_compose:
+    project_src: /opt/webapp
+    state: present
+    restarted: yes 
