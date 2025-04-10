@@ -20,12 +20,10 @@ wheels/
 .installed.cfg
 *.egg
 
-# Ansible
-*.retry
-.vault_pass
-inventory.ini
-host_vars/
-group_vars/all/vault.yml
+# Virtual Environment
+venv/
+ENV/
+env/
 
 # IDE
 .idea/
@@ -33,10 +31,15 @@ group_vars/all/vault.yml
 *.swp
 *.swo
 
-# OS
-.DS_Store
-Thumbs.db
+# Docker
+.docker/
+docker-compose.override.yml
 
 # Logs
 *.log
-logs/ 
+logs/
+
+# Local development
+.env
+.env.local
+*.db 
